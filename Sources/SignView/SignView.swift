@@ -1,18 +1,18 @@
 #if !os(macOS)
 import UIKit
  
-class SignView: UIView {
+final public class SignView: UIView {
 	
 	private var lineArray: [[CGPoint]] = [[CGPoint]]()
 	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+	public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
 		let firstPoint = touch.location(in: self)
 		lineArray.append([CGPoint]())
 		lineArray[lineArray.count - 1].append(firstPoint)
 	}
 	
-	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+	public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
 		let currentPoint = touch.location(in: self)
 		lineArray[lineArray.count - 1].append(currentPoint)
@@ -20,7 +20,7 @@ class SignView: UIView {
 		setNeedsDisplay()
 	}
 	
-	override func draw(_ rect: CGRect) {
+	public override func draw(_ rect: CGRect) {
 		guard let context = UIGraphicsGetCurrentContext() else { return }
 		draw(inContext: context)
 	}
