@@ -4,7 +4,7 @@ import UIKit
 final public class SignView: UIView {
 	
 	private var lineArray: [[CGPoint]] = [[CGPoint]]()
-	public var lineWidth = 2
+	public var lineWidth: CGFloat = 2.0
 	
 	public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
