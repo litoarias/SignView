@@ -51,9 +51,12 @@ extension SignView {
 		setNeedsDisplay()
 	}
 	
-	public func exportImage(completion: @escaping (UIImage) -> Void) {
+	public func exportImage(completion: @escaping (UIImage?) -> Void) {
 		UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
-		guard let context = UIGraphicsGetCurrentContext() else { return nil }
+		guard let context = UIGraphicsGetCurrentContext() else {
+			completion(nil)
+			return
+		}
 		draw(inContext: context)
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext()
