@@ -51,13 +51,13 @@ extension SignView {
 		setNeedsDisplay()
 	}
 	
-	public func exportImage() -> UIImage? {
+	public func exportImage(completion: @escaping (UIImage) -> Void) {
 		UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
 		guard let context = UIGraphicsGetCurrentContext() else { return nil }
 		draw(inContext: context)
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext()
-		return image
+		completion(image)
 	}
 	
 	public func exportSignLine() -> [[CGPoint]] {
