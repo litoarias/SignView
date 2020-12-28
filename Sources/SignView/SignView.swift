@@ -4,6 +4,7 @@ import UIKit
 final public class SignView: UIView {
 	
 	private var lineArray: [[CGPoint]] = [[CGPoint]]()
+	public var lineWidth = 2
 	
 	public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
@@ -26,7 +27,7 @@ final public class SignView: UIView {
 	}
 	
 	private func draw(inContext context: CGContext) {
-		context.setLineWidth(2)
+		context.setLineWidth(lineWidth)
 		context.setStrokeColor(UIColor.black.cgColor)
 		context.setLineCap(.round)
 		
