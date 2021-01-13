@@ -3,20 +3,20 @@ import UIKit
  
 final public class SignView: UIView {
 	
-	private var lineArray: [[CGPoint]] = [[CGPoint]]()
+	private var lineArray: [[(CGPoint, Date)]] = [[(CGPoint, Date)]]()
 	public var lineWidth: CGFloat = 2.0
 	
 	public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
 		let firstPoint = touch.location(in: self)
-		lineArray.append([CGPoint]())
-		lineArray[lineArray.count - 1].append(firstPoint)
+		lineArray.append(([CGPoint]()))
+		lineArray[lineArray.count - 1].append((firstPoint, Date()))
 	}
 	
 	public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
 		let currentPoint = touch.location(in: self)
-		lineArray[lineArray.count - 1].append(currentPoint)
+		lineArray[lineArray.count - 1].append((currentPoint, Date()))
 		debugPrint(currentPoint)
 		setNeedsDisplay()
 	}
@@ -63,11 +63,11 @@ extension SignView {
 		completion(image)
 	}
 	
-	public func exportSignLine() -> [[CGPoint]] {
+	public func exportSignLine() -> [[(CGPoint, Date)]] {
 		return lineArray
 	}
 	
-	public func load(points: [[CGPoint]]) {
+	public func load(points: [[(CGPoint, Date)]]) {
 		reset()
 		lineArray = points
 		setNeedsLayout()
